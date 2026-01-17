@@ -1,0 +1,93 @@
+[build-system]
+requires = ["setuptools>=65.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kline-package"
+version = "0.2.0"
+description = "A Python package for fetching price data from Binance and Oanda with caching capabilities"
+readme = "README.md"
+authors = [
+    {name = "Decipher", email = "info@rektfree.com"}
+]
+license = {text = "MIT"}
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Financial and Insurance Industry",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business :: Financial",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+keywords = ["binance", "oanda", "polygon", "ibkr", "interactive-brokers", "price", "data", "crypto", "forex", "stocks", "api", "trading"]
+
+dependencies = [
+    "pandas>=1.3.0",
+    "requests>=2.26.0",
+    "pyarrow>=6.0.0",
+]
+
+[project.optional-dependencies]
+streaming = [
+    "websockets>=10.0",
+]
+ibkr = [
+    "ib_insync>=0.9.70",
+]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=3.0.0",
+    "pytest-asyncio>=0.21.0",
+    "black>=22.0.0",
+    "flake8>=4.0.0",
+    "mypy>=0.950",
+    "isort>=5.10.0",
+    "websockets>=10.0",
+    "ib_insync>=0.9.70",
+]
+all = [
+    "websockets>=10.0",
+    "ib_insync>=0.9.70",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/kline-package"
+Documentation = "https://github.com/yourusername/kline-package#readme"
+Repository = "https://github.com/yourusername/kline-package"
+"Bug Tracker" = "https://github.com/yourusername/kline-package/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+kline_package = ["py.typed"]
+
+[tool.black]
+line-length = 100
+target-version = ["py38", "py39", "py310", "py311"]
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "--cov=kline_package --cov-report=html --cov-report=term-missing"
